@@ -5,6 +5,7 @@
 using namespace std;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void processInput(GLFWwindow* window);
 
 int main() {
 	setlocale(LC_ALL, "rus");
@@ -38,6 +39,13 @@ int main() {
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	while (!glfwWindowShouldClose(window)) {
+		// Проверка на выход
+		processInput(window);
+
+		// Рендеринг
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		// Выслать новый кадр в окно
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -49,4 +57,11 @@ int main() {
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
+}
+
+void processInput(GLFWwindow* window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
+	}
 }
