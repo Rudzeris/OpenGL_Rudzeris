@@ -1,6 +1,9 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace std;
 
@@ -8,8 +11,21 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 int main() {
+
+
 	setlocale(LC_ALL, "rus");
 	cout << "Hello" << endl;
+
+	// glm test
+	glm::vec4 vec(1.0f, 1.0f, 1.0f, 1.0f);
+	glm::mat4 trans = glm::mat4(1.0f); // Матрица идентичности
+	//trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f)); // translation
+	// Вектор будет переведен в 2,1,0
+	//trans = glm::rotate(trans, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0)); // Поворот
+	//trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5)); // Масштабирование
+	vec = trans * vec;
+	cout << vec.x << ' ' << vec.y << ' ' << vec.z << endl;
+
 	
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
